@@ -1,6 +1,7 @@
 import Header from "./components/Header";
-import AddDask from "./components/AddDask";
-import { Container,Row,Col } from "react-bootstrap";
+import AddDask from "./components/AddTask";
+import { Container, Row, Col } from "react-bootstrap";
+import Tasklist from "./components/Tasklist";
 
 function App() {
 
@@ -9,13 +10,14 @@ function App() {
     <Container>
       <Row className="justify-content-md-center">
         <Col xs lg="6">
-        <Header />
-        <AddDask />
+          <Header />
+          <AddDask />
+          <Tasklist />
         </Col>
-      </Row>  
+      </Row>
     </Container>
 
-      
+
 
   )
 }
