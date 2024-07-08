@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { addTaskToList } from '../../store/taskSlice';  
+import { useDispatch } from 'react-redux';
 
 const AddTask = () => {
+
+  const dispatch = useDispatch();
   
   const [task, setTask] = useState({
     title: "",
@@ -11,13 +15,20 @@ const AddTask = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTask(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setTask(prev => ({ ...prev, [name]: value }));
   };
+
+  const handleSubmit = (e) => {
+     e.preventDefault();
+     console.log(task);
+     dispatch(addTaskToList(task));
+     setTask({
+      title: "",
+      task: ""
+    });
+  }
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
         <Form.Control type="text" placeholder="Enter Title" name="title" 

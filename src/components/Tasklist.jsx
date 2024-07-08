@@ -5,8 +5,10 @@ import { UpdateModel } from './UpdateModel';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
-const Tasklist = () => {
+import { useSelector } from 'react-redux';
 
+const Tasklist = () => {
+    const {tasksList} = useSelector((state) => state.tasks);
     const [modalShow, setModalShow] = useState(false);
 
     function updateTask() {
@@ -23,26 +25,30 @@ const Tasklist = () => {
             <Table striped bordered hover className='text-center'>
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>#id</th>
                         <th>Title</th>
                         <th>Task</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto </td>
-                        <td>
-                            <Button className='mx-2' variant="primary" onClick={updateTask}>
-                                <i className="bi bi-pencil-square"></i>
-                            </Button>
-                            <Button variant="primary" onClick={deleteTask}>
-                                <i className="bi bi-trash3"></i>
-                            </Button>
-                        </td>
-                    </tr>
+
+                    {tasksList && tasksList.map((task) => {
+                        return (<tr>
+                            <td>{task.id}</td>
+                            <td>{task.title}</td>
+                            <td>{task.task}</td>
+                            <td>
+                                <Button className='mx-2' variant="primary" onClick={updateTask}>
+                                    <i className="bi bi-pencil-square"></i>
+                                </Button>
+                                <Button variant="primary" onClick={deleteTask}>
+                                    <i className="bi bi-trash3"></i>
+                                </Button>
+                            </td>
+                        </tr>)
+                    }
+                    )}
                 </tbody>
             </Table>
             <UpdateModel
@@ -54,4 +60,4 @@ const Tasklist = () => {
     );
 }
 
-export default Tasklist
+export default Tasklist;
