@@ -5,19 +5,24 @@ import { UpdateModel } from './UpdateModel';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedTask ,updateTaskInList} from '../../store/taskSlice';
+
 
 const Tasklist = () => {
-    const {tasksList} = useSelector((state) => state.tasks);
+
+    const dispatch = useDispatch();
+    const { tasksList } = useSelector((state) => state.tasks);
     const [modalShow, setModalShow] = useState(false);
 
-    function updateTask() {
-        console.log("Upadte");
-        setModalShow(true);
-    }
+    const updateTask = (task) => {
+    console.log("update Task");
+    setModalShow(true)
+    dispatch(setSelectedTask(task))
+  };
 
     function deleteTask() {
-        console.log("Delete");
+        // console.log("Delete");
     }
 
     return (
@@ -33,13 +38,13 @@ const Tasklist = () => {
                 </thead>
                 <tbody>
 
-                    {tasksList && tasksList.map((task) => {
-                        return (<tr>
-                            <td>{task.id}</td>
+                    {tasksList && tasksList.map((task, index) => {
+                        return (<tr key={task.id}>
+                            <td>{index + 1}</td>
                             <td>{task.title}</td>
                             <td>{task.task}</td>
                             <td>
-                                <Button className='mx-2' variant="primary" onClick={updateTask}>
+                                <Button className='mx-2' variant="primary" onClick={ () => updateTask (task)}>
                                     <i className="bi bi-pencil-square"></i>
                                 </Button>
                                 <Button variant="primary" onClick={deleteTask}>
@@ -51,12 +56,12 @@ const Tasklist = () => {
                     )}
                 </tbody>
             </Table>
+
             <UpdateModel
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
         </section>
-
     );
 }
 
