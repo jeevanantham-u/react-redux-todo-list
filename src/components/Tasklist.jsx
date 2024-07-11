@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedTask ,updateTaskInList} from '../../store/taskSlice';
+import { removeTaskFromList, setSelectedTask } from '../../store/taskSlice';
 
 
 const Tasklist = () => {
@@ -15,14 +15,13 @@ const Tasklist = () => {
     const { tasksList } = useSelector((state) => state.tasks);
     const [modalShow, setModalShow] = useState(false);
 
-    const updateTask = (task) => {
-    console.log("update Task");
-    setModalShow(true)
-    dispatch(setSelectedTask(task))
-  };
+    function showUpdateTask (task)  {
+        setModalShow(true);
+        dispatch(setSelectedTask(task));
+    };
 
-    function deleteTask() {
-        // console.log("Delete");
+    function deleteTask(task) {
+        dispatch(removeTaskFromList(task));
     }
 
     return (
@@ -44,10 +43,10 @@ const Tasklist = () => {
                             <td>{task.title}</td>
                             <td>{task.task}</td>
                             <td>
-                                <Button className='mx-2' variant="primary" onClick={ () => updateTask (task)}>
+                                <Button className='mx-2' variant="primary" onClick={ () => showUpdateTask (task)}>
                                     <i className="bi bi-pencil-square"></i>
                                 </Button>
-                                <Button variant="primary" onClick={deleteTask}>
+                                <Button variant="primary" onClick={() => deleteTask (task)}>
                                     <i className="bi bi-trash3"></i>
                                 </Button>
                             </td>

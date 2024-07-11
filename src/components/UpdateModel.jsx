@@ -26,7 +26,7 @@ export const UpdateModel = (props) => {
 
     const updateTask = () => {
         props.onHide();
-        dispatch(updateTaskInList(task))
+        dispatch(updateTaskInList(task));
       };
 
     useEffect(() => {
