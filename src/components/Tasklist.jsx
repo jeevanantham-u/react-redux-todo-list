@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { UpdateModel } from './UpdateModel';
 
@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { removeTaskFromList, setSelectedTask } from '../../store/taskSlice';
+import { fetchTasks, removeTaskFromList, setSelectedTask } from '../../store/taskSlice';
 
 
 const Tasklist = () => {
@@ -14,6 +14,10 @@ const Tasklist = () => {
     const dispatch = useDispatch();
     const { tasksList } = useSelector((state) => state.tasks);
     const [modalShow, setModalShow] = useState(false);
+
+    useEffect(() => {
+        dispatch(fetchTasks());
+      },[dispatch]);
 
     function showUpdateTask (task)  {
         setModalShow(true);
