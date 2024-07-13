@@ -2,14 +2,13 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import { addTaskToList } from '../../store/taskSlice';
+import { postTask } from '../../store/taskSlice';
 import { useDispatch } from 'react-redux';
 
 const AddTask = () => {
   const dispatch = useDispatch();
 
   const [task, setTask] = useState({
-    id: "",
     title: "",
     task: ""
   });
@@ -21,12 +20,13 @@ const AddTask = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTaskToList(task));
+    dispatch(postTask(task));
     setTask({
       title: "",
       task: ""
     });
   }
+
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
