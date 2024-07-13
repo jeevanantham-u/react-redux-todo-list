@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const base_url = 'http://localhost:8000/tasks';
+
 const initialState = {
     tasksList: [],
     selectedTask: {},
@@ -47,9 +49,7 @@ const tasksSlice = createSlice({
 export const fetchTasks = createAsyncThunk(
     "tasks/fetchTasks",
     async ( _, { rejectWithValue }) => {
-        
-        const response = await fetch('http://localhost:8000/tasks');
-
+        const response = await fetch(base_url);
         if (response.ok) {
             const jsonResponse = await response.json();
             return jsonResponse;
