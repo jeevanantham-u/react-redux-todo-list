@@ -1,29 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "1",
-      "title": "a title",
-      "task": "create java"
-    },
-    {
-      "id": "2",
-      "title": "another title",
-      "task": "create python"
-    },
-    {
-      "id": "",
-      "title": "java",
-      "task": "create java"
-    },
-    {
-      "id": "1e50",
-      "title": "jeeva",
-      "task": "hang on somthing"
-    },
-    {
-      "id": "4e7b",
-      "title": "kumar",
-      "task": "hang on somthing"
-    }
-  ]
+  "tasks": []
 }

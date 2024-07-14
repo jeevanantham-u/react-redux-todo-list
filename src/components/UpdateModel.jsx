@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { updateTaskInList } from '../../store/taskSlice';
+import { updateTasks } from '../../store/taskSlice';
 
 export const UpdateModel = (props) => {
 
@@ -26,7 +26,7 @@ export const UpdateModel = (props) => {
 
     const updateTask = () => {
         props.onHide();
-        dispatch(updateTaskInList(task));
+        dispatch(updateTasks(task));
       };
 
     useEffect(() => {

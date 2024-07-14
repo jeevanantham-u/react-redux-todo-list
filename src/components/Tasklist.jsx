@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchTasks, removeTaskFromList, setSelectedTask } from '../../store/taskSlice';
+import { deleteTasks, fetchTasks, removeTaskFromList, setSelectedTask } from '../../store/taskSlice';
 
 
 const Tasklist = () => {
@@ -25,7 +25,11 @@ const Tasklist = () => {
     };
 
     function deleteTask(task) {
-        dispatch(removeTaskFromList(task));
+        dispatch(deleteTasks(task)).unwrap().then((result) => {
+            dispatch(removeTaskFromList(result))
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 
     return (
